@@ -6,7 +6,7 @@ import { Container } from "./components/styles/Container.styles";
 import GlobalStyles from "./components/styles/Global";
 import axios from "axios";
 import { useState, useEffect } from "react";
-// import Select from "./components/Select";
+import Select from "./components/Select";
 const theme = {
   colors: {
     header: "#ebfbff",
@@ -23,6 +23,19 @@ function App() {
     fetchCards();
   }, []);
   const [cards, setCards] = useState([]);
+  // const [selectedSort, setSelectedSort] = useState("");
+
+  // const sortCards = (sort) => {
+  //   setSelectedSort(sort);
+  //   console.log(sort);
+  //   setCards(
+  //     [...cards].sort((a, b) => {
+  //       if (a[sort]) {
+  //         a[sort].localeCompare(b[sort]);
+  //       }
+  //     })
+  //   );
+  // };
 
   /////testez search
   const [search, setSearch] = useState("");
@@ -31,7 +44,6 @@ function App() {
   useEffect(() => {
     setFilterName(
       cards.filter((ceva) => {
-        // // return ceva.capital.includes(search);
         // console.log(typeof JSON.stringify(ceva.capital));
         // console.log(JSON.stringify(ceva.fifa));
         // console.log(ceva.capital.join());
@@ -50,7 +62,7 @@ function App() {
       })
     );
   }, [cards, search]);
-
+  /////search
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -61,8 +73,8 @@ function App() {
           placeholder="Search"
           onChange={(e) => setSearch(e.target.value)}
         />
-        {/* <div>
-          <Select
+        <div>
+          {/* <Select
             value={selectedSort}
             onChange={sortCards}
             defaultValue="Sort"
@@ -71,8 +83,8 @@ function App() {
               { value: "fifa", name: "Sort by Code" },
               { value: "capital", name: "Sort by Capital" },
             ]}
-          />
-        </div> */}
+          /> */}
+        </div>
         <FlexCard>
           {filterName.map((card, index) => (
             <Card {...card} key={index} />
